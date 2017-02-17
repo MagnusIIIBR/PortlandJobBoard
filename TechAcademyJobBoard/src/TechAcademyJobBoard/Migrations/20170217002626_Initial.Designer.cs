@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TechAcademyJobBoard.Data;
 
-namespace TechAcademyJobBoard.Data.Migrations
+namespace TechAcademyJobBoard.Migrations
 {
     [DbContext(typeof(TAJobBoardDbContext))]
-    [Migration("20170216225321_Initial")]
+    [Migration("20170217002626_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -213,7 +213,7 @@ namespace TechAcademyJobBoard.Data.Migrations
                     b.ToTable("Job");
                 });
 
-            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobModel.JsonJob", b =>
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJob", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -241,6 +241,20 @@ namespace TechAcademyJobBoard.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("JsonJob");
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJobObject", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("JsonJobID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("JsonJobID");
+
+                    b.ToTable("JsonJobObject");
                 });
 
             modelBuilder.Entity("TechAcademyJobBoard.Models.PlaceModel.Place", b =>
@@ -310,6 +324,13 @@ namespace TechAcademyJobBoard.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJobObject", b =>
+                {
+                    b.HasOne("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJob", "JsonJob")
+                        .WithMany()
+                        .HasForeignKey("JsonJobID");
                 });
         }
     }

@@ -10,22 +10,22 @@ using TechAcademyJobBoard.Models;
 
 namespace TechAcademyJobBoard.Controllers
 {
-    public class CompaniesController : Controller
+    public class JsonJobObjectsController : Controller
     {
         private readonly TAJobBoardDbContext _context;
 
-        public CompaniesController(TAJobBoardDbContext context)
+        public JsonJobObjectsController(TAJobBoardDbContext context)
         {
             _context = context;    
         }
 
-        // GET: Companies
+        // GET: JsonJobObjects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Company.ToListAsync());
+            return View(await _context.JsonJobObject.ToListAsync());
         }
 
-        // GET: Companies/Details/5
+        // GET: JsonJobObjects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,38 +33,38 @@ namespace TechAcademyJobBoard.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Company.SingleOrDefaultAsync(m => m.ID == id);
-            if (company == null)
+            var jsonJobObject = await _context.JsonJobObject.SingleOrDefaultAsync(m => m.ID == id);
+            if (jsonJobObject == null)
             {
                 return NotFound();
             }
 
-            return View(company);
+            return View(jsonJobObject);
         }
 
-        // GET: Companies/Create
+        // GET: JsonJobObjects/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Companies/Create
+        // POST: JsonJobObjects/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Location,Name,PhoneNumber,Website")] Company company)
+        public async Task<IActionResult> Create([Bind("ID")] JsonJobObject jsonJobObject)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(company);
+                _context.Add(jsonJobObject);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(company);
+            return View(jsonJobObject);
         }
 
-        // GET: Companies/Edit/5
+        // GET: JsonJobObjects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace TechAcademyJobBoard.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Company.SingleOrDefaultAsync(m => m.ID == id);
-            if (company == null)
+            var jsonJobObject = await _context.JsonJobObject.SingleOrDefaultAsync(m => m.ID == id);
+            if (jsonJobObject == null)
             {
                 return NotFound();
             }
-            return View(company);
+            return View(jsonJobObject);
         }
 
-        // POST: Companies/Edit/5
+        // POST: JsonJobObjects/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Location,Name,PhoneNumber,Website")] Company company)
+        public async Task<IActionResult> Edit(int id, [Bind("ID")] JsonJobObject jsonJobObject)
         {
-            if (id != company.ID)
+            if (id != jsonJobObject.ID)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace TechAcademyJobBoard.Controllers
             {
                 try
                 {
-                    _context.Update(company);
+                    _context.Update(jsonJobObject);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyExists(company.ID))
+                    if (!JsonJobObjectExists(jsonJobObject.ID))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace TechAcademyJobBoard.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(company);
+            return View(jsonJobObject);
         }
 
-        // GET: Companies/Delete/5
+        // GET: JsonJobObjects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,29 +123,29 @@ namespace TechAcademyJobBoard.Controllers
                 return NotFound();
             }
 
-            var company = await _context.Company.SingleOrDefaultAsync(m => m.ID == id);
-            if (company == null)
+            var jsonJobObject = await _context.JsonJobObject.SingleOrDefaultAsync(m => m.ID == id);
+            if (jsonJobObject == null)
             {
                 return NotFound();
             }
 
-            return View(company);
+            return View(jsonJobObject);
         }
 
-        // POST: Companies/Delete/5
+        // POST: JsonJobObjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var company = await _context.Company.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Company.Remove(company);
+            var jsonJobObject = await _context.JsonJobObject.SingleOrDefaultAsync(m => m.ID == id);
+            _context.JsonJobObject.Remove(jsonJobObject);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool CompanyExists(int id)
+        private bool JsonJobObjectExists(int id)
         {
-            return _context.Company.Any(e => e.ID == id);
+            return _context.JsonJobObject.Any(e => e.ID == id);
         }
     }
 }

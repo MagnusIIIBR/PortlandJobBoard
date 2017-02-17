@@ -5,11 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TechAcademyJobBoard.Models;
-using TechAcademyJobBoard.Models.JsonJobModel;
-using TechAcademyJobBoard.Models.CompanyModel;
-using TechAcademyJobBoard.Models.PlaceModel;
-using TechAcademyJobBoard.Models.JobModel;
-using TechAcademyJobBoard.Models.UserModel;
 
 namespace TechAcademyJobBoard.Data
 {
@@ -27,6 +22,8 @@ namespace TechAcademyJobBoard.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<JsonJobObject> JsonJobObject { get; set; }
 
         public DbSet<JsonJob> JsonJob { get; set; }
 

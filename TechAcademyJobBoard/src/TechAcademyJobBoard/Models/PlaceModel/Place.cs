@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TechAcademyJobBoard.Models.PlaceModel
+namespace TechAcademyJobBoard.Models
 {
     public class Place
     {

@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using TechAcademyJobBoard.Data;
 
-namespace TechAcademyJobBoard.Data.Migrations
+namespace TechAcademyJobBoard.Migrations
 {
     [DbContext(typeof(TAJobBoardDbContext))]
-    [Migration("00000000000000_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    partial class TAJobBoardDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc3")
+                .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -175,6 +172,122 @@ namespace TechAcademyJobBoard.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TechAcademyJobBoard.Models.CompanyModel.Company", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("Website");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JobModel.Job", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Company");
+
+                    b.Property<bool>("Contract");
+
+                    b.Property<bool>("FullTime");
+
+                    b.Property<string>("JobTitle");
+
+                    b.Property<string>("Location");
+
+                    b.Property<bool>("PartTime");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Job");
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJob", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationLink");
+
+                    b.Property<string>("Company");
+
+                    b.Property<string>("DatePosted");
+
+                    b.Property<string>("Experience");
+
+                    b.Property<string>("Hours");
+
+                    b.Property<string>("JobID");
+
+                    b.Property<string>("JobTitle");
+
+                    b.Property<string>("LanguagesUsed");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Salary");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("JsonJob");
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJobObject", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("JsonJobID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("JsonJobID");
+
+                    b.ToTable("JsonJobObject");
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.PlaceModel.Place", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Location");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Place");
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.UserModel.User", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Experience");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("Languages");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
@@ -210,6 +323,13 @@ namespace TechAcademyJobBoard.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJobObject", b =>
+                {
+                    b.HasOne("TechAcademyJobBoard.Models.JsonJobObjectModel.JsonJob", "JsonJob")
+                        .WithMany()
+                        .HasForeignKey("JsonJobID");
                 });
         }
     }

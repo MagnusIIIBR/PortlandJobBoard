@@ -13,7 +13,6 @@ using TechAcademyJobBoard.Data;
 using TechAcademyJobBoard.Models;
 using TechAcademyJobBoard.Services;
 using System.IO;
-using TechAcademyJobBoard.Models.SeedDataModel;
 
 namespace TechAcademyJobBoard
 {

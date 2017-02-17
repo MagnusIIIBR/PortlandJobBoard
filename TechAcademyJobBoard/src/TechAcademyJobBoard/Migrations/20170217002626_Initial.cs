@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TechAcademyJobBoard.Data.Migrations
+namespace TechAcademyJobBoard.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,6 +60,92 @@ namespace TechAcademyJobBoard.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Company",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Location = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Website = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Company", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Job",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Company = table.Column<string>(nullable: true),
+                    Contract = table.Column<bool>(nullable: false),
+                    FullTime = table.Column<bool>(nullable: false),
+                    JobTitle = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    PartTime = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Job", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JsonJob",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationLink = table.Column<string>(nullable: true),
+                    Company = table.Column<string>(nullable: true),
+                    DatePosted = table.Column<string>(nullable: true),
+                    Experience = table.Column<string>(nullable: true),
+                    Hours = table.Column<string>(nullable: true),
+                    JobID = table.Column<string>(nullable: true),
+                    JobTitle = table.Column<string>(nullable: true),
+                    LanguagesUsed = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    Salary = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JsonJob", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Place",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Location = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Place", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(nullable: true),
+                    Experience = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    Languages = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -150,6 +234,25 @@ namespace TechAcademyJobBoard.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JsonJobObject",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    JsonJobID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JsonJobObject", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_JsonJobObject_JsonJob_JsonJobID",
+                        column: x => x.JsonJobID,
+                        principalTable: "JsonJob",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -190,6 +293,11 @@ namespace TechAcademyJobBoard.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JsonJobObject_JsonJobID",
+                table: "JsonJobObject",
+                column: "JsonJobID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,10 +318,28 @@ namespace TechAcademyJobBoard.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Company");
+
+            migrationBuilder.DropTable(
+                name: "Job");
+
+            migrationBuilder.DropTable(
+                name: "JsonJobObject");
+
+            migrationBuilder.DropTable(
+                name: "Place");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "JsonJob");
         }
     }
 }

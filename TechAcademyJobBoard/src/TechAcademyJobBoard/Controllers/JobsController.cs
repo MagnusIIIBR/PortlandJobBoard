@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TechAcademyJobBoard.Data;
-using TechAcademyJobBoard.Models.JobModel;
+using TechAcademyJobBoard.Models;
 
 namespace TechAcademyJobBoard.Controllers
 {

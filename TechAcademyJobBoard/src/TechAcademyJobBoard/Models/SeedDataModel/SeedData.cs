@@ -6,10 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechAcademyJobBoard.Data;
-using TechAcademyJobBoard.Models.JsonJobObjectModel;
-//using TechAcademyJobBoard.Models.JsonJobModel;
 
-namespace TechAcademyJobBoard.Models.SeedDataModel
+namespace TechAcademyJobBoard.Models
 {
     public class SeedData
     {
@@ -20,8 +18,10 @@ namespace TechAcademyJobBoard.Models.SeedDataModel
             using (var context = new TAJobBoardDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<TAJobBoardDbContext>>()))
             {
-                
+
                 List<JsonJobObject> jobs = JsonConvert.DeserializeObject<List<JsonJobObject>>(jsonData);
+
+                // var result = JsonConvert.DeserializeObject<List<Dictionary<string, Dictionary<string, string>>>>(jsonData);
 
                 context.AddRange(jobs);
                 context.SaveChanges();

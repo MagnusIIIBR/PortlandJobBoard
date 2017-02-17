@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TechAcademyJobBoard.Models.JobModel
+namespace TechAcademyJobBoard.Models
 {
     public class Job
     {

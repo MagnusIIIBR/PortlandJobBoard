@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace TechAcademyJobBoard.Models.JsonJobModel
+namespace TechAcademyJobBoard.Models
 {
-    public class JsonJob
+    public class JsonJobs
     {
         public int ID { get; set; }
 
