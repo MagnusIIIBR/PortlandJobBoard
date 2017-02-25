@@ -242,5 +242,5 @@ ModelManifest.xml
 .fake/
 
 # app settings
-./JobBoardMVC/src/JobBoardMVC/web.config
-./JobBoardMVC/src/JobBoardMVC/appsettings.json
+JobBoardMVC/src/JobBoardMVC/web.config
+JobBoardMVC/src/JobBoardMVC/appsettings.json
