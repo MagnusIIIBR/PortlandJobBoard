@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using JobBoardMVC.Data;
 using JobBoardMVC.Models;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace JobBoardMVC.Controllers
 {
@@ -19,8 +20,12 @@ namespace JobBoardMVC.Controllers
 
         // GET: Jobs
         // Include LINQ query to allow search
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string jobLocation)
         {
+            IQueryable<string> locationQuery = from j in _context.Job
+                                               orderby j.Location
+                                               select j.Location;
+
             var jobs = from j in _context.Job
                        select j;
 
@@ -29,8 +34,16 @@ namespace JobBoardMVC.Controllers
                 jobs = jobs.Where(j => j.JobTitle.Contains(searchString));
             }
 
+            if (!String.IsNullOrEmpty(jobLocation))
+            {
+                jobs = jobs.Where(j => j.Location == jobLocation);
+            }
 
-            return View(await _context.Job.ToListAsync());
+            var jobLocationVM = new JobLocationViewModel();
+            jobLocationVM.locations = new SelectList(await locationQuery.Distinct().ToListAsync());
+            jobLocationVM.jobs = await jobs.ToListAsync();
+
+            return View(jobLocationVM);
         }
 
         // GET: Jobs/Details/5
