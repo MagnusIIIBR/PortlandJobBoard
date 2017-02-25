@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace TechAcademyJobBoard.Models
 {
-    public class JsonJobs
+    public class JsonJob
     {
         public int ID { get; set; }
 

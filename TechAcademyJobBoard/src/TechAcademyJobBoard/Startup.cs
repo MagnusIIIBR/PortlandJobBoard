@@ -85,7 +85,7 @@ namespace TechAcademyJobBoard
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            var dataText = System.IO.File.ReadAllText("C:\\Users\\Gary\\Documents\\GitHub\\JobBoard\\TechAcademyJobBoard\\src\\TechAcademyJobBoard\\AppData\\JobBoard.json");
+            var dataText = System.IO.File.ReadAllText("C:\\Users\\Gary\\Documents\\GitHub\\JobBoard\\TechAcademyJobBoard\\src\\TechAcademyJobBoard\\AppData\\JobBoardJson.json");
             SeedData.InitializeDb(dataText, app.ApplicationServices);
         }
     }
