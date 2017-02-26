@@ -10,18 +10,23 @@
         <a asp-action="Create">Create New</a>
     </p>
 
-    <form asp-controller="Jobs" asp-action="Index" method="get">
-        <div class="form-group">
-            <select asp-for="jobLocation" asp-items="Model.locations">
-                <option value="">All</option>
+
+    <form asp-controller="Jobs" asp-action="Index" method="get" class="form-horizontal">
+        <div class="form-group-lg">
+            <label for="location-drop-down">Location: </label>
+            <select asp-for="jobLocation" asp-items="Model.locations" class="form-control" id="location-drop-down">
+                <option value=""></option>
             </select>
+        </div>
+        <div class="form-group-lg">
             <label for="TitleSearch">Job Title: </label>
-            <input id="TitleSearch" type="text" name="SearchString" class="form-control" placeholder="Job Title" />
-            <input type="submit" value="Filter" class="btn btn-default" />
+            <input id="TitleSearch" type="text" name="SearchString" class="form-control" placeholder="i.e. Software Developer" />
+            <input type="submit" value="Filter" class="btn btn-default btn-lg" />
         </div>
     </form>
 
-    <table class="table">
+
+    <table class="table table-hover table-responsive">
         <thead>
             <tr>
                 <th>
@@ -32,29 +37,16 @@
                 </th>                                   
                 <th>                                    
                     @Html.DisplayNameFor(model => model.jobs[0].DatePosted)
-                </th>                                   
-                <th>                                    
-                    @Html.DisplayNameFor(model => model.jobs[0].Experience)
-                </th>                                   
-                <th>                                    
-                    @Html.DisplayNameFor(model => model.jobs[0].Hours)
-                </th>                                   
+                </th>                                                                  
                 <th>                                   
                     @Html.DisplayNameFor(model => model.jobs[0].JobID)
                 </th>                                   
                 <th>                                    
                     @Html.DisplayNameFor(model => model.jobs[0].JobTitle)
-                </th>                                   
-                <th>                                   
-                    @Html.DisplayNameFor(model => model.jobs[0].LanguagesUsed)
-                </th>                                   
+                </th>                                                               
                 <th>                                    
                     @Html.DisplayNameFor(model => model.jobs[0].Location)
                 </th>                                  
-                <th>                                    
-                    @Html.DisplayNameFor(model => model.jobs[0].Salary)
-                </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -71,25 +63,13 @@
                         @Html.DisplayFor(modelItem => item.DatePosted)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Experience)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Hours)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.JobID)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.JobTitle)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LanguagesUsed)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                 </tr>
             }
