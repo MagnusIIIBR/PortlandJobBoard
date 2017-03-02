@@ -20,7 +20,7 @@ namespace JobBoardMVC.Controllers
 
         // GET: Jobs
         // Include LINQ query to allow search
-        public async Task<IActionResult> Index(string searchString, string jobLocation)
+        public async Task<IActionResult> Index(string jobTitleString, string jobLocation, string companyString)
         {
             IQueryable<string> locationQuery = from j in _context.Job
                                                orderby j.Location
@@ -29,14 +29,19 @@ namespace JobBoardMVC.Controllers
             var jobs = from j in _context.Job
                        select j;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(jobTitleString))
             {
-                jobs = jobs.Where(j => j.JobTitle.Contains(searchString));
+                jobs = jobs.Where(j => j.JobTitle.Contains(jobTitleString));
             }
 
             if (!String.IsNullOrEmpty(jobLocation))
             {
                 jobs = jobs.Where(j => j.Location == jobLocation);
+            }
+
+            if (!String.IsNullOrEmpty(companyString))
+            {
+                jobs = jobs.Where(j => j.Company.Contains(companyString));
             }
 
             var jobLocationVM = new JobLocationViewModel();

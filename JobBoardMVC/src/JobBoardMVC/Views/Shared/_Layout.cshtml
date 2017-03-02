@@ -17,7 +17,9 @@
     </environment>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <!-- Nav Bar-->
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,18 +28,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">JobBoardMVC</a>
+                <a asp-area="" asp-controller="Jobs" asp-action="Index" class="navbar-brand"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span> Portland Job Board</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </div>
+    <!-- End Nav Bar-->
+
+    <!-- Body Content-->
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -46,6 +46,7 @@
             <script>new Date().getFullYear()>2010&&document.write(new Date().getFullYear());</script>- Portland Job Board</p>
         </footer>
     </div>
+    <!-- End Body Content-->
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

@@ -4,27 +4,36 @@
         ViewData["Title"] = "Index";
     }
 
-    <h2>Index</h2>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-
-
-    <form asp-controller="Jobs" asp-action="Index" method="get" class="form-horizontal">
-        <div class="form-group-lg">
-            <label for="location-drop-down">Location: </label>
-            <select asp-for="jobLocation" asp-items="Model.locations" class="form-control" id="location-drop-down">
-                <option value=""></option>
-            </select>
+    <section class="container">
+        <div class="jumbotron">
+            <h1>The Tech Academy Job Board</h1>
+            <p>Welcome to the Tech Academy! We are a career trading school for programming as well as one stop shop for your job search in and around Portland, OR.</p>
         </div>
-        <div class="form-group-lg">
-            <label for="TitleSearch">Job Title: </label>
-            <input id="TitleSearch" type="text" name="SearchString" class="form-control" placeholder="i.e. Software Developer" />
-            <input type="submit" value="Filter" class="btn btn-default btn-lg" />
-        </div>
-    </form>
+    </section>
 
+<section class="container">
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <a class="twitter-timeline" data-width="400" data-height="350" href="https://twitter.com/pdxtechjobs">Tweets by pdxtechjobs</a>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</section>
+
+    <section class="container">
+        <form asp-controller="Jobs" asp-action="Index" method="get" class="form-horizontal">
+            <div class="form-group-lg">
+                <label for="location-drop-down">Location: </label>
+                <select asp-for="jobLocation" asp-items="Model.locations" class="form-control" id="location-drop-down">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group-lg">
+                <label for="TitleSearch">Job Title: </label>
+                <input id="TitleSearch" type="text" name="jobTitleString" class="form-control" placeholder="i.e. Software Developer" />
+                <label for="CompanySearch">Company: </label>
+                <input id="CompanySearch" type="text" name="companyString" class="form-control" placeholder="i.e. Microsoft" />
+                <input type="submit" value="Filter" class="btn btn-default btn-lg" />
+            </div>
+        </form>
+    </section>  
 
     <table class="table table-hover table-responsive">
         <thead>
